@@ -30,3 +30,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 Run `npm install` to initialize node module dependencies
 
 Run `npm run package` to build and package library
+
+Run `npm login` to login into npm account 
+
+Run `npm publish --access public` to publish 
