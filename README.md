@@ -33,4 +33,4 @@ Run `npm run package` to build and package library
 
 Run `npm login` to login into npm account 
 
-Run `npm publish --access public` to publish 
+Run `npm publish --access public` from /dist/ngx-google folder to publish 
