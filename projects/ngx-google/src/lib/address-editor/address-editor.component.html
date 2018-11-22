@@ -1,0 +1,19 @@
+<div [formGroup]="addressForm">
+  <input formControlName="value"
+         [ngClass]="{'form-control': true, 'is-invalid': parentForm.dirty && ( route.invalid || street_number.invalid ), 'is-valid': parentForm.dirty && ( !route.invalid && !street_number.invalid ) }"
+         (keyup)="searchAddress(value.value)"
+         (blur)="addressOnBlur()"
+         autocomplete="new-password"
+  />
+  <div class="list-group" *ngIf="addresses && addresses.length>0">
+    <a *ngFor="let address of addresses" class="list-group-item" (click)="selectAddress(address)"
+       style="cursor: pointer;">
+      {{address.value}}
+    </a>
+  </div>
+
+  <div *ngIf="parentForm.dirty">
+    <div *ngIf="route.errors?.required" class="invalid-feedback d-block">{{labels['Not valid address']}}</div>
+    <div *ngIf="!route.errors?.required && street_number.errors?.required" class="invalid-feedback d-block">{{labels['Enter a street number']}}</div>
+  </div>
+</div>
