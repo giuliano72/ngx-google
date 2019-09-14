@@ -50,7 +50,7 @@ export class NgxGoogleService {
 
   }
 
-  createMap(mapId: string, mapConfig: { zoom: number, center: Position }): Gmap {
+  createMap(mapId: string, mapConfig: { zoom: number, center: Position, styles: any }): Gmap {
     console.log('NgxGoogleService.createMap ...');
 
     const gmap = new Gmap(mapId, mapConfig);

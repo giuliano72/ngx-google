@@ -1,6 +1,7 @@
 import {Gmarker} from './gmarker';
 import {Position} from './position';
 import {Gcircle} from './gcircle';
+import {style} from '@angular/animations';
 
 declare const google;
 
@@ -9,15 +10,26 @@ export class Gmap {
   private map: any;
   private centerMarker: Gmarker;
 
-  constructor(mapId: string, mapConfig: {zoom: number, center: Position}) {
+  constructor(mapId: string, mapConfig: {zoom: number, center: Position, styles: any}) {
     // console.log('new Gmap(' + mapId + ')');
-    this.map = new google.maps.Map(document.getElementById(mapId), {
-      zoom: mapConfig.zoom,
-      center: new google.maps.LatLng(
-        mapConfig.center.latitude,
-        mapConfig.center.longitude
-      )
-    });
+    if (mapConfig.styles) {
+      this.map = new google.maps.Map(document.getElementById(mapId), {
+        zoom: mapConfig.zoom,
+        center: new google.maps.LatLng(
+          mapConfig.center.latitude,
+          mapConfig.center.longitude
+        ),
+        styles: mapConfig.styles
+      });
+    } else {
+      this.map = new google.maps.Map(document.getElementById(mapId), {
+        zoom: mapConfig.zoom,
+        center: new google.maps.LatLng(
+          mapConfig.center.latitude,
+          mapConfig.center.longitude
+        )
+      });
+    }
   }
 
   get zoom() {
@@ -35,6 +47,11 @@ export class Gmap {
 
   set center(position: Position) {
     this.map.setCenter({lat: +position.latitude, lng: +position.longitude});
+  }
+
+  set style(value) {
+    console.log('Gmap set style');
+    this.map.setOptions({styles: value});
   }
 
   addMarker(position: Position, image, draggable: boolean, isCenterMarker = false): Gmarker {

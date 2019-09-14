@@ -31,8 +31,10 @@ export class MapComponent implements OnInit, AfterViewInit,  AfterViewChecked, A
   @Input('zoom') _zoom = 10;
   @Input() width = '50%';
   @Input() height = '400px';
+  // @Input() style = null;
   @Output() update = new EventEmitter();
 
+  private _style: any;
   private _center: Position;
   private mapConfig: any;
 
@@ -50,7 +52,8 @@ export class MapComponent implements OnInit, AfterViewInit,  AfterViewChecked, A
 
     this.mapConfig = {
       zoom: this._zoom,
-      center: this.center
+      center: this.center,
+      styles: this._style
     };
   }
 
@@ -84,10 +87,22 @@ export class MapComponent implements OnInit, AfterViewInit,  AfterViewChecked, A
   }
 
   @Input() set center(center: Position) {
-    // console.log('MapComponent set center');
+    console.log('MapComponent set center');
     this._center = center;
     if (this.gmap) {
       this.gmap.center = center;
+    }
+  }
+
+  get style(): any {
+    return this._style;
+  }
+
+  @Input() set style(value: any) {
+    console.log('MapComponent set style');
+    this._style = value;
+    if (this.gmap) {
+      this.gmap.style = value;
     }
   }
 

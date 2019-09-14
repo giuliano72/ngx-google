@@ -65,7 +65,8 @@ export class GroupByRegionListComponent implements OnInit {
         });
 
         console.log('GroupByRegionListComponent keys: ' + JSON.stringify(keys));
-        keys.sort(this.sortingFunction);
+        // keys.sort(this.sortingFunction);
+        keys.sort();
 
         this.regions = [];
         this.regions.push({key: 'Tutte', value: 'all'});
